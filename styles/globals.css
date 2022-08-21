@@ -60,14 +60,144 @@ a {
   font-size: 0.85rem;
 }
 
-.h4 {
+h4 {
   font-size: 1.2rem;
 }
 
-.h5 {
+h5 {
   font-size: 0.9rem;
 }
 
 .row {
   margin: 0;
+}
+
+.btn-primary {
+  background-color: white;
+  color: #4169e3;
+  font-size: 0.85rem;
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus {
+  background-color: #4169e3;
+  font-size: 0.85rem;
+}
+
+.btn-warning {
+  background-color: #ff5318;
+  color: white;
+  font-size: 0.85rem;
+}
+
+.btn-warning:hover,
+.btn-warning:active,
+.btn-warning:focus {
+  background-color: #eb4b16;
+  color: white;
+  font-size: 0.85rem;
+}
+
+.btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.paymentForm {
+  width: 550px;
+  min-width: 320px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  padding: 1.5rem;
+}
+
+@media (max-width: 550px) {
+  .paymentForm {
+    padding: 0rem;
+  }
+}
+
+.paymentForm__price {
+  width: 80px;
+  text-align: end;
+}
+
+.paymentForm__tnc {
+  display: flex;
+  align-items: center;
+  max-width: 800px;
+  border: 2px solid rgb(231, 231, 231);
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.paymentForm__cc {
+  border: 1px solid rgb(231, 231, 231);
+  border-radius: 5px;
+  padding: 0.8rem;
+}
+
+.paymentForm__cc__required::before {
+  content: "*";
+  color: red;
+}
+
+.paymentForm__tnc__checkbox {
+  height: 1rem;
+  width: 1rem;
+  margin-right: 0.56rem;
+}
+
+.paymentForm__products,
+.paymentForm__shipping,
+.paymentForm__payment {
+  padding: 0.3rem;
+}
+
+.btn.is-active {
+  background-color: #4169e3;
+  color: white;
+  font-size: 0.85rem;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.card {
+  height: 100%;
+  border-radius: 25px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin: 0 !important;
+}
+
+.paymentForm__payment__cc__alert {
+  color: red;
+  margin: 0;
+  padding: 0;
+}
+
+.paymentForm__payment__cc__input {
+  position: relative;
+}
+
+.paymentForm__payment__cc__input__icon {
+  position: absolute;
+  height: 50%;
+  top: 10px;
+  right: 10px;
+  word-wrap: break-word;
+  white-space: pre-line;
+  /* cursor: pointer; */
 }

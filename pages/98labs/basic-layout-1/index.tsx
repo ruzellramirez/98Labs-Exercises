@@ -1,132 +1,164 @@
+import React, { useEffect, useState } from "react";
 import type { NextPage } from "next";
-import styles from "./style.module.css";
 import Link from "next/link";
 import Head from "next/head";
-// import React, { useState, useEffect } from "react";
+
+import { CreditCard } from "../../../components";
+
+import axios from "axios";
+
+interface Product {
+  id: number;
+  name: string;
+  price: string;
+  url: string;
+}
+
+interface Fee {
+  id: number;
+  name: string;
+  price: string;
+}
+
+interface OrderData {
+  products: Product[];
+  fees: Fee[];
+  total: number;
+}
 
 const BasicLayout1: NextPage = () => {
+  const [paymentMethod, setPaymentMethod] = useState<string>("Credit card");
+  const [state, setState] = useState<OrderData>({
+    products: [],
+    fees: [],
+    total: 0,
+  });
+
+  let child;
+  switch (paymentMethod) {
+    case "Credit card":
+      child = <CreditCard total={state.total} />;
+      break;
+    case "Gift card":
+      child = <GiftCard />;
+      break;
+    case "PayPal":
+      child = <PayPal />;
+      break;
+    default:
+  }
+
+  const handlePaymentMethodClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    document.querySelector(".is-active")?.classList.remove("is-active");
+    e.currentTarget.classList.toggle("is-active");
+    setPaymentMethod(e.currentTarget.innerHTML);
+  };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const products = await axios.get("/data/products.json");
+        const fees = await axios.get("/data/fees.json");
+
+        let total: number = 0;
+        products.data.forEach((product: Product) => {
+          total += parseFloat(product.price);
+        });
+        fees.data.forEach((fee: Fee) => {
+          total += parseFloat(fee.price);
+        });
+        setState({
+          ...state,
+          products: products.data,
+          fees: fees.data,
+          total: total,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+
   return (
     <section>
       <Head>
         <title>98 Labs Coding Exercises - Basic Layout 1</title>
       </Head>
       <div className="container d-flex align-items-center justify-content-center">
-        <div className={styles.paymentForm}>
+        <div className="paymentForm">
           <p className="fw-bold text-uppercase text-center">Demo Store</p>
-          <p className="h4">Checkout</p>
-          <div className={styles.paymentForm__tnc__products}>
-            <p className="h5 py-1">Products</p>
+          <h4>Checkout</h4>
+          <div className="paymentForm__products">
+            <h5 className="py-1">Products</h5>
             <table>
-              <tr>
-                <td className="ps-3">
-                  <Link href="#" className="">
-                    <a>
-                      Apple® - IPad® with Retina® display Wi-Fi -32GB - White
-                    </a>
-                  </Link>
-                </td>
-                <td className={styles.paymentForm__price}>$499.00</td>
-              </tr>
-              <tr>
-                <td className="ps-3">
-                  <Link href="#" className="">
-                    16GB A Series Walkman Video MP3
-                  </Link>
-                </td>
-                <td className={styles.paymentForm__price}>$130.00</td>
-              </tr>
+              <tbody>
+                {state.products &&
+                  state.products.map((product) => {
+                    return (
+                      <tr key={product.id}>
+                        <td className="ps-3">
+                          <Link href={product.url}>
+                            <a>{product.name}</a>
+                          </Link>
+                        </td>
+                        <td className="paymentForm__price">${product.price}</td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
             </table>
           </div>
-          <div className={styles.paymentForm__tnc__shipping}>
+          <div className="paymentForm__shipping">
             <p className="h5 py-1">Shipping Method</p>
             <table>
-              <tr>
-                <td className="ps-3">
-                  <p>FedEx</p>
-                </td>
-                <td className={styles.paymentForm__price}>$13.99</td>
-              </tr>
+              <tbody>
+                {state.fees &&
+                  state.fees.map((fee) => {
+                    return (
+                      <tr key={fee.id}>
+                        <td className="ps-3">
+                          <p>{fee.name}</p>
+                        </td>
+                        <td className="paymentForm__price">${fee.price}</td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
             </table>
           </div>
-          <div className={styles.paymentForm__tnc__payment}>
+          <div className="paymentForm__payment">
             <p className="h5 py-1">Payment Method</p>
-            <div className="row d-flex justify-content-between">
-              <div className="col-4">
-                <button className="btn btn-primary w-100">Credit card</button>
+            <div className="d-flex justify-content-between">
+              <div className="col pe-2">
+                <button
+                  className="btn btn-primary btn-sm w-100 is-active"
+                  onClick={handlePaymentMethodClick}
+                >
+                  Credit card
+                </button>
               </div>
-              <div className="col-4">
-                <button className="btn btn-primary w-100">Gift card</button>
+              <div className="col pe-2">
+                <button
+                  className="btn btn-primary btn-sm w-100"
+                  onClick={handlePaymentMethodClick}
+                >
+                  Gift card
+                </button>
               </div>
-              <div className="col-4">
-                <button className="btn btn-primary w-100">PayPal</button>
+              <div className="col">
+                <button
+                  className="btn btn-primary btn-sm w-100"
+                  onClick={handlePaymentMethodClick}
+                >
+                  PayPal
+                </button>
               </div>
             </div>
+            {child}
           </div>
-          <div id={styles.paymentForm__tnc__payment__cc}>
-            {" "}
-            <form className={["row", "my-3"].join(" ")}>
-              <div
-                className={[styles.paymentForm__tnc__cc, "col-lg-7"].join(" ")}
-              >
-                <label className="form-label fw-bold" htmlFor="cardNumber">
-                  Card Number
-                </label>
-                <input
-                  className="form-control"
-                  type="text"
-                  name="cardNumber"
-                  id="cardNumber"
-                  required
-                />
-                <label className="form-label fw-bold m-0" htmlFor="cardNumber">
-                  Valid thru (mm/yy)
-                </label>
-                <input
-                  className="form-control"
-                  type="text"
-                  name="cardNumber"
-                  id="cardNumber"
-                  required
-                />
-                <label className="form-label fw-bold m-0" htmlFor="cardNumber">
-                  Cardholder&apos;s name
-                </label>
-                <input
-                  className="form-control"
-                  type="text"
-                  name="cardNumber"
-                  id="cardNumber"
-                  required
-                />
-              </div>
-              <div className="col-lg-5">
-                {" "}
-                <label
-                  className="form-label pt-4 fw-bold m-0"
-                  htmlFor="cardNumber"
-                >
-                  CVV/CVC
-                </label>
-                <input
-                  className="form-control"
-                  type="text"
-                  name="cardNumber"
-                  id="cardNumber"
-                  required
-                />
-              </div>
-              <div className={styles.paymentForm__tnc}>
-                <input
-                  className={styles.paymentForm__tnc__checkbox}
-                  id="checkbox"
-                  type="checkbox"
-                />
-                <label htmlFor="checkbox">
-                  I accept the <a href="#">Terms and Conditions</a>.
-                </label>
-              </div>
-              <button className="btn btn-warning">Place Order ($624.99)</button>
-            </form>
+          <div className="text-center">
+            <Link href="/98labs">Back to Home</Link>
           </div>
         </div>
       </div>
@@ -135,3 +167,11 @@ const BasicLayout1: NextPage = () => {
 };
 
 export default BasicLayout1;
+
+function GiftCard({}) {
+  return <div id="paymentForm__payment_gc">Gift Card</div>;
+}
+
+function PayPal({}) {
+  return <div id="paymentForm__payment_pp">PayPal</div>;
+}

@@ -1,4 +1,3 @@
-import styles from "./style.module.css";
 import Link from "next/link";
 
 interface cardInfo {
@@ -11,7 +10,7 @@ interface cardInfo {
 const Card = ({ title, expectations, address, url }: cardInfo) => {
   return (
     <div className="col-lg-6">
-      <div className={styles.card}>
+      <div className="card">
         <p>
           <span className="fw-bold">Title: &nbsp;</span>
           {title}
