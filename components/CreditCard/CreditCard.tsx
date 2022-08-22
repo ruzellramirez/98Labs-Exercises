@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Modal } from "../";
 
 import { useCreditCardValidator } from "react-creditcard-validator";
@@ -36,33 +36,41 @@ const CreditCard = ({ total }: { total: number }) => {
     meta: { erroredInputs },
   } = useCreditCardValidator();
 
-  const handleChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
-    setState({ ...state, [e.currentTarget.name]: e.currentTarget.value });
-  };
+  const handleChange = useCallback(
+    (e: React.SyntheticEvent<HTMLInputElement>) => {
+      setState({ ...state, [e.currentTarget.name]: e.currentTarget.value });
+    },
+    [state]
+  );
 
-  const handleCheckboxChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
-    e.currentTarget.checked
-      ? setState({ ...state, [e.currentTarget.name]: true })
-      : setState({ ...state, [e.currentTarget.name]: false });
-  };
+  const handleCheckboxChange = useCallback(
+    (e: React.SyntheticEvent<HTMLInputElement>) => {
+      e.currentTarget.checked
+        ? setState({ ...state, [e.currentTarget.name]: true })
+        : setState({ ...state, [e.currentTarget.name]: false });
+    },
+    [state]
+  );
 
-  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(state);
-    if (
-      erroredInputs.cardNumber === undefined &&
-      erroredInputs.expiryDate === undefined &&
-      erroredInputs.cvc === undefined &&
-      state.checkBox === true
-    ) {
-      alert("Credit card information is validated.");
-    } else {
-      erroredInputs.cardNumber && alert(erroredInputs.cardNumber);
-      erroredInputs.expiryDate && alert(erroredInputs.expiryDate);
-      erroredInputs.cvc && alert(erroredInputs.cvc);
-      !state.checkBox && alert("Please accept terms and conditions");
-    }
-  };
+  const handleSubmit = useCallback(
+    (e: React.SyntheticEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      console.log(state);
+      if (
+        erroredInputs.cardNumber === undefined &&
+        erroredInputs.expiryDate === undefined &&
+        erroredInputs.cvc === undefined &&
+        state.checkBox === true
+      ) {
+        alert("Credit card information is validated.");
+      } else {
+        erroredInputs.cardNumber && alert(erroredInputs.cardNumber);
+        erroredInputs.expiryDate && alert(erroredInputs.expiryDate);
+        erroredInputs.cvc && alert(erroredInputs.cvc);
+      }
+    },
+    [erroredInputs, state]
+  );
 
   //4012888888881881
 
@@ -160,9 +168,10 @@ const CreditCard = ({ total }: { total: number }) => {
             name="checkBox"
             type="checkBox"
             onChange={handleCheckboxChange}
+            required
           />
           <label htmlFor="checkBox">
-            I accept the{" "}
+            I accept the&nbsp;
             <a
               href="#"
               onClick={() => {

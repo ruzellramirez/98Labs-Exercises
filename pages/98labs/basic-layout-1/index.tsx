@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import type { NextPage } from "next";
 import Link from "next/link";
 import Head from "next/head";
 
-import { CreditCard } from "../../../components";
+import { CreditCard, GiftCard, PayPal } from "../../../components";
 
 import axios from "axios";
 
@@ -48,12 +48,15 @@ const BasicLayout1: NextPage = () => {
     default:
   }
 
-  const handlePaymentMethodClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    document.querySelector(".is-active")?.classList.remove("is-active");
-    e.currentTarget.classList.toggle("is-active");
-    setPaymentMethod(e.currentTarget.innerHTML);
-  };
+  const handlePaymentMethodClick = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      document.querySelector(".is-active")?.classList.remove("is-active");
+      e.currentTarget.classList.toggle("is-active");
+      setPaymentMethod(e.currentTarget.innerHTML);
+    },
+    []
+  );
 
   useEffect(() => {
     (async () => {
@@ -81,7 +84,7 @@ const BasicLayout1: NextPage = () => {
   }, []);
 
   return (
-    <section>
+    <section className="basic-layout">
       <Head>
         <title>98 Labs Coding Exercises - Basic Layout 1</title>
       </Head>
@@ -110,7 +113,7 @@ const BasicLayout1: NextPage = () => {
             </table>
           </div>
           <div className="paymentForm__shipping">
-            <p className="h5 py-1">Shipping Method</p>
+            <h5 className="py-1">Shipping Method</h5>
             <table>
               <tbody>
                 {state.fees &&
@@ -128,7 +131,7 @@ const BasicLayout1: NextPage = () => {
             </table>
           </div>
           <div className="paymentForm__payment">
-            <p className="h5 py-1">Payment Method</p>
+            <h5 className="pb-2">Payment Method</h5>
             <div className="d-flex justify-content-between">
               <div className="col pe-2">
                 <button
@@ -167,11 +170,3 @@ const BasicLayout1: NextPage = () => {
 };
 
 export default BasicLayout1;
-
-function GiftCard({}) {
-  return <div id="paymentForm__payment_gc">Gift Card</div>;
-}
-
-function PayPal({}) {
-  return <div id="paymentForm__payment_pp">PayPal</div>;
-}
