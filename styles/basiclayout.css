@@ -1,3 +1,7 @@
+.basic-layout {
+  background: rgb(157, 215, 231);
+}
+
 .paymentForm {
   background-color: white;
   width: 550px;
@@ -70,14 +74,6 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-.card {
-  height: 100%;
-  border-radius: 25px;
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
-  margin: 0 !important;
-}
-
 .paymentForm__payment__cc__alert {
   color: red;
   margin: 0;
@@ -96,4 +92,19 @@ input[type="number"] {
   word-wrap: break-word;
   white-space: pre-line;
   /* cursor: pointer; */
+}
+
+.btn-payment {
+  background-color: white;
+  color: #4169e3;
+  font-size: 0.85rem;
+  border: 2px solid rgb(221, 221, 221);
+}
+
+.btn-payment:hover,
+.btn-payment:active,
+.btn-payment:focus {
+  background-color: #4169e3;
+  color: white;
+  font-size: 0.85rem;
 }

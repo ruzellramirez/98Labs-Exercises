@@ -9,7 +9,7 @@ interface cardInfo {
 
 const Card = ({ title, expectations, address, url }: cardInfo) => {
   return (
-    <div className="col-lg-6">
+    <div className="col-lg-6 mb-2">
       <div className="card">
         <p>
           <span className="fw-bold">Title: &nbsp;</span>

@@ -70,18 +70,20 @@ h5 {
 
 .row {
   margin: 0;
+  padding: 0;
 }
 
 .btn-primary {
-  background-color: white;
-  color: #4169e3;
+  background-color: #486cd8;
+  border-color: #486cd8;
   font-size: 0.85rem;
 }
 
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary:focus {
-  background-color: #4169e3;
+  background-color: white;
+  color: #486cd8;
   font-size: 0.85rem;
 }
 
@@ -104,6 +106,30 @@ h5 {
   box-shadow: none !important;
 }
 
-.basic-layout {
-  background: rgb(157, 215, 231);
+.home__heading {
+  padding: 1rem 0;
+}
+
+.home__heading__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.7rem;
+}
+
+.home__heading__logo {
+  height: 20px;
+  margin-left: 1rem;
+}
+
+.btn-dark {
+  background-color: rgb(48, 48, 48);
+}
+
+.card {
+  width: 100%;
+  border-radius: 25px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin: 0 !important;
 }

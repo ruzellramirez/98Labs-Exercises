@@ -7,7 +7,6 @@ import {
   faCreditCard,
   faCircleQuestion,
 } from "@fortawesome/free-solid-svg-icons";
-// import axios from "axios";
 
 interface ccForm {
   cardName: string;
@@ -98,6 +97,7 @@ const CreditCard = ({ total }: { total: number }) => {
             />
             <FontAwesomeIcon
               className="paymentForm__payment__cc__input__icon"
+              id="fa__cc"
               icon={faCreditCard}
               color="grey"
             />
@@ -154,6 +154,7 @@ const CreditCard = ({ total }: { total: number }) => {
             />
             <FontAwesomeIcon
               className="paymentForm__payment__cc__input__icon"
+              id="fa__cq"
               icon={faCircleQuestion}
               color="grey"
               data-bs-toggle="tooltip"
