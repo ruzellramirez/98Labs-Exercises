@@ -35,24 +35,28 @@ const NinetyEightLabs: NextPage = () => {
           </Link>
         </div>
 
-        <div className="row">
-          <Card
-            title="XYZ Problem"
-            expectations="The difficulty level of this exercise depends on the level and
+        <div className="row gx-1">
+          <div className="col-lg-6 mb-2">
+            <Card
+              title="XYZ Problem"
+              expectations="The difficulty level of this exercise depends on the level and
                 liberties of the applicant - solutions can either be simple or
                 complex. The applicant’s approach will show their creativity,
                 proper understanding of the technology used, thought process,
                 and critical thinking in solving the given problem set."
-            address="Frontend or Backend Developer Applicants"
-            url="/98labs/xyz-problem"
-          ></Card>
-          <Card
-            title="Basic Layout 1"
-            expectations="A Junior
+              address="Frontend or Backend Developer Applicants"
+              url="/98labs/xyz-problem"
+            ></Card>
+          </div>
+          <div className="col-lg-6 mb-2">
+            <Card
+              title="Basic Layout 1"
+              expectations="A Junior
             Frontend Developer should be able to accomplish this."
-            address="Frontend Developer Applicants"
-            url="/98labs/basic-layout-1"
-          ></Card>
+              address="Frontend Developer Applicants"
+              url="/98labs/basic-layout-1"
+            ></Card>
+          </div>
         </div>
       </section>
     </div>

@@ -18,4 +18,7 @@
   .xyz__problem {
     padding: 0.8rem;
   }
+  .xyz__problem__form {
+    padding: 0rem;
+  }
 }
