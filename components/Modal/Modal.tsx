@@ -22,7 +22,10 @@ const Modal: React.FunctionComponent<Props> = ({
       >
         <div className="text-end">
           {" "}
-          <button className="btn btn-sm btn-danger" onClick={onRequestClose}>
+          <button
+            className="btn btn-sm btn-danger  float-end"
+            onClick={onRequestClose}
+          >
             X
           </button>
         </div>

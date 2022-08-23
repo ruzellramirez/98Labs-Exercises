@@ -1,0 +1,21 @@
+.xyz__problem {
+  background-color: rgb(226, 226, 226);
+  padding: 2rem;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.xyz__problem__solution {
+  background-color: white;
+  height: 100%;
+  min-height: 50vh;
+  padding: 1rem;
+  font-family: var(--font-xyz);
+  border-radius: 5px;
+}
+
+@media (max-width: 550px) {
+  .xyz__problem {
+    padding: 0.8rem;
+  }
+}

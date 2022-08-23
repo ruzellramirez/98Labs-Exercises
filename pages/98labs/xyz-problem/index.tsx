@@ -15,8 +15,7 @@ const XYZProblem: NextPage = () => {
     size: 3 | 0,
     direction: "horizontal",
   });
-  const [innerHTMLArray, setInnerHTMLArray] = useState<Array | null>([]);
-
+  const [innerHTMLArray, setInnerHTMLArray] = useState<Array<object>>([]);
   const handleChange = (
     e: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLSelectElement>
   ) => {
@@ -72,7 +71,7 @@ const XYZProblem: NextPage = () => {
   };
 
   const createPattern = (patternData: XYZData) => {
-    const { letters, size, direction } = patternData;
+    const { letters, size } = patternData;
     let innerChild = "";
     const patternArray = letters.split("");
     let currentArray: any = [];

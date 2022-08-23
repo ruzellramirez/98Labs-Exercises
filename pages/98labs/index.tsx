@@ -2,8 +2,6 @@ import type { NextPage } from "next";
 import { Card } from "../../components";
 import Head from "next/head";
 
-// import Image from "next/image";
-
 const NinetyEightLabs: NextPage = () => {
   return (
     <div>
